@@ -100,5 +100,12 @@ dist
 # DynamoDB Local files
 .dynamodb/
 
+# Temp Files
+
+tmp/*
+!tmp/.gitkeep
+temp/*
+!temp/.gitkeep
+
 # TernJS port file
 .tern-port
