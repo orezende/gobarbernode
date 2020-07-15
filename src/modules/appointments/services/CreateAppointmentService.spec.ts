@@ -6,7 +6,7 @@ describe('CreateAppoint context', () => {
   let fakeAppointmentsRepository: FakeAppointmentsRepository;
   let createAppointmentService: CreateAppointmentService;
 
-  beforeAll(() => {
+  beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
     createAppointmentService = new CreateAppointmentService(
       fakeAppointmentsRepository,
@@ -27,7 +27,7 @@ describe('CreateAppoint context', () => {
 
   it('should not be able to create two appointment on the same time', async () => {
     expect.hasAssertions();
-    const appointmentDate = new Date(2020, 6, 14, 20);
+    const appointmentDate = new Date();
 
     await createAppointmentService.execute({
       date: appointmentDate,
