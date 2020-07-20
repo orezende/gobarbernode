@@ -8,7 +8,8 @@
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpileOnly --ignore-watch node_modules src/shared/infra/http/server.ts tsc ",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migration:revert": "typeorm migration:revert",
-    "test": "jest"
+    "test": "jest",
+    "tdd": "jest --watch --verbose=true"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
