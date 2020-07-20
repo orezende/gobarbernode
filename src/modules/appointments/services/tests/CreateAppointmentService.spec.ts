@@ -1,6 +1,6 @@
 import AppError from '@shared/errors/AppError';
-import CreateAppointmentService from './CreateAppointmentService';
-import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository';
+import CreateAppointmentService from '../CreateAppointmentService';
+import FakeAppointmentsRepository from '../../repositories/fakes/FakeAppointmentsRepository';
 
 describe('CreateAppoint context', () => {
   let fakeAppointmentsRepository: FakeAppointmentsRepository;
