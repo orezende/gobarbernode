@@ -2,7 +2,6 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 
-// import User from '@modules/users/infra/typeorm/entities/User';
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IUsersTokenRepository from '../repositories/IUsersTokenRepository';
@@ -20,7 +19,7 @@ export default class SendForgotPasswordEmailService {
     @inject('MailProvider')
     private mailProvider: IMailProvider,
 
-    @inject('UsersTokenRepository')
+    @inject('UsersTokensRepository')
     private usersTokenRepository: IUsersTokenRepository,
   ) {}
 
@@ -31,11 +30,11 @@ export default class SendForgotPasswordEmailService {
       throw new AppError('User does not exists');
     }
 
-    await this.usersTokenRepository.generate(user.id);
+    const { token } = await this.usersTokenRepository.generate(user.id);
 
     await this.mailProvider.sendMail(
       email,
-      'Pedido de recuperação de senha recebido',
+      `Pedido de recuperação de senha recebido ${token}`,
     );
   }
 }
