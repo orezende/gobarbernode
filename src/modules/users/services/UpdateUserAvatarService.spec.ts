@@ -1,8 +1,8 @@
 import AppError from '@shared/errors/AppError';
 
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
-import UpdateUserAvatarService from '../UpdateUserAvatarService';
-import FakeUsersRepository from '../../repositories/fakes/FakeUsersRepository';
+import UpdateUserAvatarService from './UpdateUserAvatarService';
+import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 
 describe('UpdateUserAvatar context', () => {
   let fakeUsersRepository: FakeUsersRepository;
