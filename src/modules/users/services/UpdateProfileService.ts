@@ -24,7 +24,13 @@ export default class UpdateProfileService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({ id, name, email }: IRequest): Promise<User> {
+  public async execute({
+    id,
+    name,
+    email,
+    password,
+    oldPassword,
+  }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(id);
 
     if (!user) {
@@ -33,12 +39,31 @@ export default class UpdateProfileService {
 
     const userWithUpdatedEmail = await this.usersRepository.findByEmail(email);
 
-    if (userWithUpdatedEmail && userWithUpdatedEmail.id != id) {
+    if (userWithUpdatedEmail && userWithUpdatedEmail.id !== id) {
       throw new AppError('E-mail already in use');
     }
 
     user.name = name;
     user.email = email;
+
+    if (password && !oldPassword) {
+      throw new AppError(
+        'You need to inform the old password to set a new password ',
+      );
+    }
+
+    if (password && oldPassword) {
+      const checkOldPassword = await this.hashProvider.compareHash(
+        oldPassword,
+        user.password,
+      );
+
+      if (!checkOldPassword) {
+        throw new AppError('You need to inform the old password corretcly ');
+      }
+
+      user.password = await this.hashProvider.generateHash(password);
+    }
 
     return this.usersRepository.save(user);
   }

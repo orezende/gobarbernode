@@ -51,11 +51,64 @@ describe('UpdateProfile context', () => {
       password: '123456',
     });
 
-    expect(
+    await expect(
       updateProfileService.execute({
         id: user.id,
         name: 'John Trê',
         email: 'johndoe@mail.com',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should be able to update the password', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@mail.com',
+      password: '123456',
+    });
+
+    const updatedUser = await updateProfileService.execute({
+      id: user.id,
+      email: 'mail@mail.com',
+      name: 'esnothing',
+      oldPassword: '123456',
+      password: '123123',
+    });
+
+    expect(updatedUser.password).toBe('123123');
+  });
+
+  it('should not be able to update the password without the old password', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@mail.com',
+      password: '123456',
+    });
+
+    await expect(
+      updateProfileService.execute({
+        id: user.id,
+        email: 'mail@mail.com',
+        name: 'esnothing',
+        password: '123123',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to update the password with wrong old password', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@mail.com',
+      password: '123456',
+    });
+
+    await expect(
+      updateProfileService.execute({
+        id: user.id,
+        email: 'mail@mail.com',
+        name: 'esnothing',
+        password: '123123',
+        oldPassword: 'wrongpassword',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
