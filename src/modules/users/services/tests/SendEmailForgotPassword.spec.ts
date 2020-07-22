@@ -1,11 +1,11 @@
 import AppError from '@shared/errors/AppError';
 import FakeMailProvider from '@shared/container/providers/MailProvider/fakes/FakeMailProvider';
-import SendForgotPasswordEmailService from './SendForgotPasswordEmailService';
-import FakeUserRepository from '../repositories/fakes/FakeUsersRepository';
-import FakeUsersTokenRepository from '../repositories/fakes/FakeUsersTokensRepository';
+import SendEmailForgotPassword from '../SendEmailForgotPassword';
+import FakeUserRepository from '../../repositories/fakes/FakeUsersRepository';
+import FakeUsersTokenRepository from '../../repositories/fakes/FakeUsersTokensRepository';
 
 describe('SendForgotPasswordEmail context', () => {
-  let sendForgotPasswordEmailService: SendForgotPasswordEmailService;
+  let sendEmailForgotPassword: SendEmailForgotPassword;
   let fakeUserRepository: FakeUserRepository;
   let fakeMailProvider: FakeMailProvider;
   let fakeUsersTokenRepository: FakeUsersTokenRepository;
@@ -14,7 +14,7 @@ describe('SendForgotPasswordEmail context', () => {
     fakeUserRepository = new FakeUserRepository();
     fakeMailProvider = new FakeMailProvider();
     fakeUsersTokenRepository = new FakeUsersTokenRepository();
-    sendForgotPasswordEmailService = new SendForgotPasswordEmailService(
+    sendEmailForgotPassword = new SendEmailForgotPassword(
       fakeUserRepository,
       fakeMailProvider,
       fakeUsersTokenRepository,
@@ -30,7 +30,7 @@ describe('SendForgotPasswordEmail context', () => {
       password: '1234567',
     });
 
-    await sendForgotPasswordEmailService.execute({
+    await sendEmailForgotPassword.execute({
       email: 'johndoe@mail.com',
     });
 
@@ -39,7 +39,7 @@ describe('SendForgotPasswordEmail context', () => {
 
   it('should not be able to recover a non-existing user password', async () => {
     await expect(
-      sendForgotPasswordEmailService.execute({
+      sendEmailForgotPassword.execute({
         email: 'johndoe@mail.com',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -54,7 +54,7 @@ describe('SendForgotPasswordEmail context', () => {
       password: '1234567',
     });
 
-    await sendForgotPasswordEmailService.execute({
+    await sendEmailForgotPassword.execute({
       email: 'johndoe@mail.com',
     });
 

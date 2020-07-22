@@ -1,8 +1,8 @@
 import AppError from '@shared/errors/AppError';
-import ResetPasswordService from './ResetPasswordService';
-import FakeUserRepository from '../repositories/fakes/FakeUsersRepository';
-import FakeUsersTokenRepository from '../repositories/fakes/FakeUsersTokensRepository';
-import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
+import ResetPasswordService from '../ResetPasswordService';
+import FakeUserRepository from '../../repositories/fakes/FakeUsersRepository';
+import FakeUsersTokenRepository from '../../repositories/fakes/FakeUsersTokensRepository';
+import FakeHashProvider from '../../providers/HashProvider/fakes/FakeHashProvider';
 
 describe('ResetPassword context', () => {
   let resetPasswordService: ResetPasswordService;

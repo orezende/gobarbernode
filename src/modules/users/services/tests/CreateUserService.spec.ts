@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
-import CreateUserService from './CreateUserService';
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
+import CreateUserService from '../CreateUserService';
+import FakeUsersRepository from '../../repositories/fakes/FakeUsersRepository';
+import FakeHashProvider from '../../providers/HashProvider/fakes/FakeHashProvider';
 
 describe('CreateUserService context', () => {
   let fakeUsersRepository: FakeUsersRepository;
