@@ -9,6 +9,7 @@
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migration:revert": "typeorm migration:revert",
     "test": "jest",
+    "clean-jest": "jest --clearCache",
     "tdd": "jest --watch --verbose=true"
   },
   "dependencies": {

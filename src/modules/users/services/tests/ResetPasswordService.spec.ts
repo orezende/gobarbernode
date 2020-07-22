@@ -76,4 +76,13 @@ describe('ResetPassword context', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should not be able to reset the password with non-existing token', async () => {
+    await expect(
+      resetPasswordService.execute({
+        password: '123123',
+        token: 'non-existing-token',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

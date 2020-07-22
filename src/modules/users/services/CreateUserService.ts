@@ -31,12 +31,10 @@ export default class CreateUserService {
 
     const hashedPassword = await this.hashProvider.generateHash(password);
 
-    const user = await this.usersRepository.create({
+    return this.usersRepository.create({
       name,
       email,
       password: hashedPassword,
     });
-
-    return user;
   }
 }
