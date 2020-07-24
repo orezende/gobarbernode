@@ -15,17 +15,52 @@ describe('ListProvidersMonthAvailability context', () => {
   it('should be able to list the month availability from provider', async () => {
     await fakeAppointmentRepository.create({
       providerId: 'user',
-      date: new Date(2020, 3, 1, 8, 0, 0),
-    });
-
-    await fakeAppointmentRepository.create({
-      providerId: 'user',
       date: new Date(2020, 4, 1, 8, 0, 0),
     });
 
     await fakeAppointmentRepository.create({
       providerId: 'user',
       date: new Date(2020, 4, 1, 9, 0, 0),
+    });
+
+    await fakeAppointmentRepository.create({
+      providerId: 'user',
+      date: new Date(2020, 4, 1, 10, 0, 0),
+    });
+
+    await fakeAppointmentRepository.create({
+      providerId: 'user',
+      date: new Date(2020, 4, 1, 11, 0, 0),
+    });
+
+    await fakeAppointmentRepository.create({
+      providerId: 'user',
+      date: new Date(2020, 4, 1, 12, 0, 0),
+    });
+
+    await fakeAppointmentRepository.create({
+      providerId: 'user',
+      date: new Date(2020, 4, 1, 13, 0, 0),
+    });
+
+    await fakeAppointmentRepository.create({
+      providerId: 'user',
+      date: new Date(2020, 4, 1, 14, 0, 0),
+    });
+
+    await fakeAppointmentRepository.create({
+      providerId: 'user',
+      date: new Date(2020, 4, 1, 15, 0, 0),
+    });
+
+    await fakeAppointmentRepository.create({
+      providerId: 'user',
+      date: new Date(2020, 4, 1, 16, 0, 0),
+    });
+
+    await fakeAppointmentRepository.create({
+      providerId: 'user',
+      date: new Date(2020, 4, 1, 17, 0, 0),
     });
 
     await fakeAppointmentRepository.create({
@@ -41,10 +76,10 @@ describe('ListProvidersMonthAvailability context', () => {
 
     expect(availability).toEqual(
       expect.arrayContaining([
-        { day: 19, available: true },
-        { day: 20, available: false },
-        { day: 21, available: false },
-        { day: 22, available: true },
+        { day: 1, available: false },
+        { day: 2, available: true },
+        { day: 3, available: true },
+        { day: 4, available: true },
       ]),
     );
   });
