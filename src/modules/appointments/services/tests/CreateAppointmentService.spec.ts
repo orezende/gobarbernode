@@ -19,6 +19,7 @@ describe('CreateAppoint context', () => {
     const appointment = await createAppointmentService.execute({
       date: new Date(),
       providerId,
+      userId: 'fakeuserid',
     });
 
     expect(appointment).toHaveProperty('id');
@@ -32,13 +33,21 @@ describe('CreateAppoint context', () => {
     await createAppointmentService.execute({
       date: appointmentDate,
       providerId: Date.now().toString(),
+      userId: 'fakeuserid',
     });
 
     expect(
       createAppointmentService.execute({
         date: appointmentDate,
         providerId: Date.now().toString(),
+        userId: 'fakeuserid',
       }),
     ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to create an appointment on a past date', async () => {
+    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
+      return new Date(2020, 4, 10, 12).getTime();
+    });
   });
 });
