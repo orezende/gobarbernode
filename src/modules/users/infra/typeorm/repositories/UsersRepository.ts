@@ -36,8 +36,6 @@ class UsersRepository implements IUsersRepository {
       where: { email },
       withDeleted: false,
     });
-
-    console.log(user);
     return user;
   }
 
