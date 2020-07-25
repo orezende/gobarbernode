@@ -1,4 +1,5 @@
 import AppError from '@shared/errors/AppError';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import CreateUserService from '../CreateUserService';
 import FakeUsersRepository from '../../repositories/fakes/FakeUsersRepository';
 import FakeHashProvider from '../../providers/HashProvider/fakes/FakeHashProvider';
@@ -7,13 +8,16 @@ describe('CreateUserService context', () => {
   let fakeUsersRepository: FakeUsersRepository;
   let createUserService: CreateUserService;
   let fakeHashProvider: FakeHashProvider;
+  let fakeCacheProvider: FakeCacheProvider;
 
   beforeEach(() => {
     fakeHashProvider = new FakeHashProvider();
     fakeUsersRepository = new FakeUsersRepository();
+    fakeCacheProvider = new FakeCacheProvider();
     createUserService = new CreateUserService(
       fakeUsersRepository,
       fakeHashProvider,
+      fakeCacheProvider,
     );
   });
 

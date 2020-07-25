@@ -43,8 +43,6 @@ export default class ListProviderAppointmentsService {
         },
       );
 
-      console.log('bateu fortemente aqui');
-
       await this.cacheProvider.save(cacheKey, appointments);
     }
 
