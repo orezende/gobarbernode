@@ -12,9 +12,14 @@ export default class FakeAppointmentsRepository
   implements IAppointmentsRepository {
   appointments: Array<Appointment> = [];
 
-  public async findByDate(date: Date): Promise<Appointment | undefined> {
+  public async findByDate(
+    date: Date,
+    providerId: string,
+  ): Promise<Appointment | undefined> {
     const findAppointment = await this.appointments.find(
-      appointment => appointment.date.getTime() === date.getTime(),
+      appointment =>
+        appointment.date.getTime() === date.getTime() &&
+        appointment.providerId === providerId,
     );
 
     return findAppointment;
