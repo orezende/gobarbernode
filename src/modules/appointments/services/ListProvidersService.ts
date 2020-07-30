@@ -4,6 +4,7 @@ import User from '@modules/users/infra/typeorm/entities/User';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
+import { classToClass } from 'class-transformer';
 
 interface IRequest {
   exceptUserId?: string;
@@ -29,7 +30,10 @@ export default class ListProvidersService {
         exceptUserId,
       });
 
-      await this.cacheProvider.save(`providers-list:${exceptUserId}`, users);
+      await this.cacheProvider.save(
+        `providers-list:${exceptUserId}`,
+        classToClass(users),
+      );
     }
 
     return users;
