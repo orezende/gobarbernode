@@ -65,13 +65,13 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
-ormconfig.json
+# ormconfig.json
 
 # Yarn Integrity file
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+# .env
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
